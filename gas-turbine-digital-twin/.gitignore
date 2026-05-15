@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.env
+.venv/
+venv/
+.DS_Store
+
+# Python
+*.log
+
+# Docker / local volumes
+postgres_data/
+grafana_data/
+
+# IDE
+.vscode/
+.idea/

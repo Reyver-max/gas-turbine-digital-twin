@@ -1,0 +1,30 @@
+name: Docker Build Check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build backend image
+        run: docker build -t gas-turbine-backend ./backend
+
+      - name: Build simulator image
+        run: docker build -t gas-turbine-simulator ./simulator
+
+      - name: Validate Docker Compose config
+        run: docker compose config
+
+      - name: Build full Docker Compose stack
+        run: docker compose build

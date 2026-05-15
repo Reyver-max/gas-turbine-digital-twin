@@ -1,0 +1,54 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: turbine_postgres
+    environment:
+      POSTGRES_DB: turbine_db
+      POSTGRES_USER: turbine_user
+      POSTGRES_PASSWORD: turbine_password
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U turbine_user -d turbine_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    container_name: turbine_backend
+    environment:
+      POSTGRES_HOST: postgres
+      POSTGRES_DB: turbine_db
+      POSTGRES_USER: turbine_user
+      POSTGRES_PASSWORD: turbine_password
+      POSTGRES_PORT: 5432
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  simulator:
+    build: ./simulator
+    container_name: turbine_simulator
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: turbine_grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - postgres
+    volumes:
+      - grafana_data:/var/lib/grafana
+
+volumes:
+  postgres_data:
+  grafana_data:
