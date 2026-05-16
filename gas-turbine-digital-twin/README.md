@@ -219,7 +219,12 @@ Potential future upgrades:
 
 # Screenshots
 
-(Add Grafana dashboard screenshots here)
+<img width="1531" height="631" alt="Screenshot 2026-05-15 at 21 53 11" src="https://github.com/user-attachments/assets/ff44c830-a5af-42fd-a14a-56f63041d9eb" />
+
+<img width="1498" height="597" alt="Screenshot 2026-05-15 at 21 53 26" src="https://github.com/user-attachments/assets/8cce08e9-0eab-43d3-b622-c1410878d3b2" />
+
+
+<img width="1498" height="601" alt="Screenshot 2026-05-15 at 21 53 37" src="https://github.com/user-attachments/assets/a2bd14fc-64a1-4c61-8dcf-501b4d6de670" />
 
 ---
 
